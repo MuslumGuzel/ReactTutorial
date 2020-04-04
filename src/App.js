@@ -1,6 +1,22 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+      background-color: ${props => props.alt ? 'red' : 'green'};
+      color: white;
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+      
+      &:hover {
+        background-color: ${props => props.alt ? 'salmın' : 'lightgreen'};
+        color: ${props => props.alt ? 'black' : 'white'};
+      }
+`
+;
 
 class App extends Component {
 
@@ -47,11 +63,13 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+
     }
 
     let persons = null;
@@ -69,15 +87,17 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = "red";
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a react</h1>
-        <button
-          style={style}
+        <StyledButton
+          alt={this.state.showPersons}
           onClick={this.togglePersonsHandler}
-        >Show Persons</button>
+        >Show Persons</StyledButton>
         {persons}
       </div>
     );
