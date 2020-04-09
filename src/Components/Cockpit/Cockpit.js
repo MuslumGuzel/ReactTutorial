@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './Cockpit.css';
 
 const cockpit = (props) => {
+
+  useEffect(() => {
+    console.log("[Cockpit.js] useEffect");
+    //Http request..
+    const timer = setTimeout(() => {
+      alert("Data saved to cloud!");
+    }, 1000);
+    return () => {
+      clearTimeout(timer);
+      console.log("[Cockpit.js] cleanup work in useEffect");
+    }
+  }, []);
+  //It will run like ComponentDidMount if we send empty array to second argument in use effect
+
+  //More than one definition is allowed
+  //useEffect();
+
+  useEffect(() => {
+    console.log("[Cockpit.js] 2nd useEffect");
+    return () => {
+      console.log("[Cockpit.js] cleanup work in 2nd useEffect");
+    }
+  })
 
     let buttonClasses = '';
         
@@ -22,7 +45,7 @@ const cockpit = (props) => {
 
     return (
       <div className={classes.Cockpit}>
-        <h1>Hi, I'm a react</h1>
+        <h1>{props.title}</h1>
         <p className={assignedClasses.join(" ")}>This is really working!!</p>
         <button className={buttonClasses} 
             onClick={props.clicked}>
